@@ -13,4 +13,4 @@ require LSpec from git
    "https://github.com/yatima-inc/LSpec" @ "a8dc2f38fc38f16efcc877ca8a4c7b37d3965db0"
 
 require mathlib from git
-   "https://github.com/leanprover-community/mathlib4" @ "56b19bdec560037016e326795d0feaa23b402c20"
+   "https://github.com/leanprover-community/mathlib4" @ "dd1ecc5d3aefab6a83767079c7d020f4aa254a24"
