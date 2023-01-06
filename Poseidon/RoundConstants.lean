@@ -45,20 +45,21 @@ hashing is not supported, and this parameters is included only for completeness
 private def grainStateInit (usingRef isPrime : Bool) (a : Int) (prime : Nat) 
                            (t fullRound partialRound : UInt64) := 
   let sBoxBits := if usingRef then refSBoxBits else lurkSBoxBits
-  (fieldBits isPrime) |> (· <<< (4 : UInt64))
-                      |> (· + sBoxBits a)
-                      |> (· <<< (12 : UInt64))
-                      |> (· + fieldSizeBits prime)
-                      |> (· <<< (12 : UInt64))
-                      |> (· + t)
-                      |> (· <<< (10 : UInt64))
-                      |> (· + fullRound)
-                      |> (· <<< (10 : UInt64))
-                      |> (· + partialRound)
-                      |> (padOne · 14)
-                      |>.toByteArray
-                      |>.push 0xff
-                      |>.push 0xff
+  ByteArray.mk $
+    (fieldBits isPrime) |> (· <<< (4 : UInt64))
+                        |> (· + sBoxBits a)
+                        |> (· <<< (12 : UInt64))
+                        |> (· + fieldSizeBits prime)
+                        |> (· <<< (12 : UInt64))
+                        |> (· + t)
+                        |> (· <<< (10 : UInt64))
+                        |> (· + fullRound)
+                        |> (· <<< (10 : UInt64))
+                        |> (· + partialRound)
+                        |> (padOne · 14)
+                        |>.toByteArray.data.reverse
+                        |>.push 0xff
+                        |>.push 0xff
 
 namespace Poseidon
 
